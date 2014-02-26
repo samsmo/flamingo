@@ -13,7 +13,7 @@
     },
     "scripts": {
         "test": "cake build:test",
-        "start": "brunch watch --server"
+        "start": "nodemon app.js --stack-size=4096"
     },
     "dependencies": {
         "javascript-brunch": ">= 1.0 < 1.8",
@@ -29,7 +29,13 @@
 
         "coffeelint-brunch": ">= 1.0 < 1.8",
         "imageoptmizer-brunch": "~0.0.3",
-        "auto-reload-brunch": ">= 1.0 < 1.8"
+        "auto-reload-brunch": ">= 1.0 < 1.8",
+
+        "express": "3.4.8",
+        "jade": "*",
+        "mongo": "latest",
+        "mongoskin": "latest",
+        "nodemon": "latest"
     },
     "devDependencies": {
         "karma": "~0.10",

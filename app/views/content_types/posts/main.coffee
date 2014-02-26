@@ -1,13 +1,17 @@
-PostsCollection = require('collections/posts')
+PostItem        = require('views/content_types/posts/list')
 Base            = require('views/base')
 
 module.exports = class PostsMainView extends Base
-    el: '.blog-roll'
     tpl: require('views/content_types/posts/templates/list')
     events:
         'click add-post': 'addPost'
     postInit: ->
-        Flamingo.Collections.PostsCollection = new PostsCollection()
-        @listenTo Flamingo.Collections.PostsCollection, 'add', @addPost
-    addPost: ->
-        console.log 'add a post'
+        @listenTo @collection, 'add', @addPost
+    postRender: ->
+        that = @
+        if @collection && @collection.models
+            _.each @collection.models, (post)->
+                console.log post
+                that.addPost(post)
+    addPost: (post)->
+        @addView(new PostItem({model: post}))

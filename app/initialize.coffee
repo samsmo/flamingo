@@ -12,4 +12,4 @@ $ ->
     Flamingo.Routers.MainRouter = new MainRouter = require 'routers/main'
 
     # Initialize Backbone History
-    Backbone.history.start pushState: yes
+    Backbone.history.start pushState: no

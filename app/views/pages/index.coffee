@@ -5,4 +5,4 @@ module.exports = class IndexView extends PageView
     tagName: 'div'
     tpl: require 'views/templates/index'
     postInit: ->
-        PostsView  = @addView(new PostsMainView())
+        PostsView  = @addView(new PostsMainView({collection: @collection}))

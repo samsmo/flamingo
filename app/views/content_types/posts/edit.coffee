@@ -7,9 +7,10 @@ module.exports = class PostsEditView extends Page
         'click .submit': 'handleForm'
     postInit: ->
         Model = new PostModel()
+        console.log @collection
     handleForm: (e) ->
         e.preventDefault()
         post =
             'title' : $.trim @$el.find('input#title').val()
-            'text': $.trim @$el.find('input#search').val()
-        Flamingo.Collections.PostsCollection.add(post)
+            'description': $.trim @$el.find('textarea#description').val()
+        @collection.add post
