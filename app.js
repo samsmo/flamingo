@@ -6,6 +6,7 @@
 var express = require('express'),
     routes = require('./routes'),
     post = require('./routes/posts'),
+    admin = require('./routes/admin')
     http = require('http'),
     path = require('path'),
     mongo = require('mongoskin'),
@@ -34,11 +35,24 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 //Basic routes
+app.all('/admin*', function (req, res){
+    if(!req.session.user){
+        res.redirect('/login');
+    }else{
+        next();
+    }
+});
+
 app.get('/', routes.index);
 app.get('/api/posts', post.list(db));
 app.post('/api/posts', post.create(db));
 app.put('/api/posts', post.update(db));
 app.del('/api/posts', post.destroy(db));
+
+/** Admin Routes **/
+app.get('/admin', admin.list(db));
+app.get('/login', admin.login(db));
+app.post('/login', admin.auth(db));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

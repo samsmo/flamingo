@@ -11,7 +11,6 @@ module.exports = class PostsMainView extends Base
         that = @
         if @collection && @collection.models
             _.each @collection.models, (post)->
-                console.log post
                 that.addPost(post)
     addPost: (post)->
         @addView(new PostItem({model: post}))

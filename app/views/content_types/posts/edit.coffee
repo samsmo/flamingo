@@ -6,11 +6,10 @@ module.exports = class PostsEditView extends Page
     events:
         'click .submit': 'handleForm'
     postInit: ->
-        Model = new PostModel()
-        console.log @collection
     handleForm: (e) ->
-        e.preventDefault()
         post =
             'title' : $.trim @$el.find('input#title').val()
             'description': $.trim @$el.find('textarea#description').val()
-        @collection.add post
+        Post = new PostModel(post)
+        @collection.add Post
+        Post.save()

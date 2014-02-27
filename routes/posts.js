@@ -13,8 +13,8 @@ exports.list = function(db) {
 
 exports.create = function(db) {
     return function(req, res){
-        var data = req.body.data;
-        db.collection('postlist').insert( function (err, item){
+        var data = req.body;
+        db.collection('postlist').insert( data, function (err, item){
             var type = (err) ? 'error' : 'success';
             res.json({type: 'successfully added post!'});
         });
@@ -23,11 +23,13 @@ exports.create = function(db) {
 
 exports.update = function(db) {
     return function(req, res){
-        var data = req.body.data;
+        var data = req.body;
+        console.log(data);
+        /*
         db.collection('postlist').insert( function (err, item){
             var type = (err) ? 'error' : 'success';
             res.json({type: 'successfully added post!'});
-        });
+        });*/
     };
 };
 

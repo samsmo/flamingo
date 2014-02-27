@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+    .container.admin
+        form(role="form" class="form-signin" action="/login" method="POST")
+            div.form-group
+                label(for="username") Username
+                input(placeholder="username ex. JohnSmo" type="text" id="username" name="username" class="form-control")
+            div.form-group
+                label(for="password") Password
+                input(placeholder="password" type="password" id="password" name="password" class="form-control")
+            button(type="submit" class="btn btn-primary submit") Submit

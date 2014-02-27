@@ -8,7 +8,6 @@ module.exports = class BaseView extends Backbone.View
         #override
     addView: (view) ->
         @children.push view
-        console.log view
         @$el.append view.render().$el
         view
     render: () ->

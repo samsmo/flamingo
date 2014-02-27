@@ -4,4 +4,4 @@ module.exports = class PostCollection extends Backbone.Collection
     model: Post
     initialize: ->
         @fetch()
-        @listenTo Backbone.Events, 'post:added', @add
+        @listenTo Backbone.Events, 'post:added', @save

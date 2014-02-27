@@ -3,6 +3,5 @@ module.exports = class PostsListView extends Base
     el: '.roll'
     tpl: require('views/content_types/posts/templates/item')
     render:->
-        console.log 'test'
-        @$el.html(@tpl(@model.toJSON()))
+        @$el.append(@tpl(@model.toJSON()))
         this
