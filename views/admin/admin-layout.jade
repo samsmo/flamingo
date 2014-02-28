@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/font-awesome.css')
+    link(rel='stylesheet', href='/css/bootstrap.css')
+    link(rel='stylesheet', href='/admin-styles/admin.css')
+    script.
+        window.brunch = window.brunch || {};
+  body
+    include partials/header
+    .container
+        block content
