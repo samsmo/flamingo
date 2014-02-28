@@ -1,4 +1,8 @@
 extends ../../admin-layout
 
 block content
-    h1 blog stuff
+    h1 Blog posts
+    ul
+        each val in posts
+            li 
+                a(href="/admin/posts/id/#{ val._id}")=  val.title

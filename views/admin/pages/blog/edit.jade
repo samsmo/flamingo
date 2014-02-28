@@ -1,0 +1,13 @@
+extends ../../admin-layout
+
+block content
+    .container
+        .jumbotron
+            form(method="POST" action="/admin/blog/edit/")
+                .form-group
+                    label(for="title") Title
+                    input(type="text" placeholder="Title" name="title" id="title" value="#{ post.title }" class="form-control")
+                .form-group
+                    label(for="description") Description
+                    textarea(id="description" placeholder="Description ..." class="form-control" cols="50") #{ post.description }
+                button.btn.btn-submit submit

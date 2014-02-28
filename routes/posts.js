@@ -3,16 +3,16 @@
  * GET users listing.
  */
 
-exports.list = function(db) {
-    return function(req, res){
+exports.list = function (db) {
+    return function (req, res){
         db.collection('postlist').find().toArray(function (err, items) {
             res.json(items);
         });
     };
 };
 
-exports.create = function(db) {
-    return function(req, res){
+exports.create = function (db) {
+    return function (req, res){
         var data = req.body;
         db.collection('postlist').insert( data, function (err, item){
             var type = (err) ? 'error' : 'success';
@@ -21,8 +21,8 @@ exports.create = function(db) {
     };
 };
 
-exports.update = function(db) {
-    return function(req, res){
+exports.update = function (db) {
+    return function (req, res){
         var data = req.body;
         console.log(data);
         /*
@@ -33,8 +33,8 @@ exports.update = function(db) {
     };
 };
 
-exports.destroy = function(db) {
-    return function(req, res){
+exports.destroy = function (db) {
+    return function (req, res){
         var data = req.body.data;
         console.log(data);
         /*db.collection('postlist').remove( data,  function (err, item){

@@ -36,13 +36,13 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 //Admin Route Filter [Auth Required]
-app.all('/admin*', function (req, res, next){
+/*app.all('/admin*', function (req, res, next){
     if(!req.session.user){
         res.redirect('/login');
     }else{
         next();
     }
-});
+});*/
 
 //Basic routes
 app.get('/', routes.index);
@@ -62,7 +62,8 @@ app.get('/admin/store', admin.store.list(db));
 /** Admin Page Routes **/
 app.get('/admin/pages', admin.pages.list(db));
 /** Admin Blog Routes **/
-app.get('/admin/blog', admin.blog.list(db));
+app.get('/admin/blog/(:page)?*', admin.blog.list(db));
+app.get('/admin/posts/id/(:id)', admin.blog.edit(db));
 /** Admin Gallery Routes **/
 app.get('/admin/gallery', admin.gallery.list(db));
 
