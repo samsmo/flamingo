@@ -1,12 +1,13 @@
 PostsCollection = require('collections/posts')
-PostsEditView = require 'views/content_types/posts/edit'
+PostView = require 'views/content_types/posts/show'
 IndexView = require('views/pages/index')
+PostModel = require('models/post')
 AppView = require 'views/app'
 
 module.exports = class MainRouter extends Backbone.Router
     routes:
         '': 'index'
-        'posts_edit': 'postEdit'
+        'posts/:id': 'showPost'
     currentView: null
     posts: null
     init: false
@@ -14,7 +15,6 @@ module.exports = class MainRouter extends Backbone.Router
         that = @
         #Create main view
         AppView = new AppView()
-        @posts = new PostsCollection()
         #Handle real URLS without page refresh
         $(document).on 'click', 'a:not([data-bypass])', (evt) ->
             href = $(this).attr 'href'
@@ -25,9 +25,16 @@ module.exports = class MainRouter extends Backbone.Router
                 if href isnt Backbone.history.fragment
                     that.pageChange(href)
     index: ->
+        @posts ?= new PostsCollection()
         @currentView = AppView.createPage(new IndexView({collection: @posts}))
-    postEdit: ->
-        @currentView = AppView.createPage(new PostsEditView({collection: @posts}))
+    showPost: (param) ->
+        if @posts
+            post = @posts.findWhere({ _id: param })
+        else
+            post = new PostModel({id : param})
+            post.fetch()
+
+        @currentView = AppView.createPage(new PostView({model: post}))
     pageChange: (href)->
         @currentView.destroy()
         @navigate href, true

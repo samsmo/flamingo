@@ -47,9 +47,7 @@ if ('development' == app.get('env')) {
 //Basic routes
 app.get('/', routes.index);
 app.get('/api/posts', post.list(db));
-app.post('/api/posts', post.create(db));
-app.put('/api/posts', post.update(db));
-app.del('/api/posts', post.destroy(db));
+app.get('/api/posts/:id', post.show(db));
 
 /** Admin Routes **/
 app.get('/admin', admin.list(db));
@@ -63,7 +61,8 @@ app.get('/admin/store', admin.store.list(db));
 app.get('/admin/pages', admin.pages.list(db));
 /** Admin Blog Routes **/
 app.get('/admin/blog/(:page)?*', admin.blog.list(db));
-app.get('/admin/posts/id/(:id)', admin.blog.edit(db));
+app.get('/admin/posts/id/(:id)', admin.blog.edit_get(db));
+app.post('/admin/posts/id/(:id)', admin.blog.edit_post(db));
 /** Admin Gallery Routes **/
 app.get('/admin/gallery', admin.gallery.list(db));
 

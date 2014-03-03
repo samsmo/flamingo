@@ -1,13 +1,3 @@
-exports.list = function (db) {
-    return function (req, res) {
-        var page = (req.params.page) ? (req.params.page - 1) : 0,
-            skip = page * 10;
-        db.collection('postlist').find().skip(skip).limit(10).toArray(function (err, items) {
-            res.render('admin/pages/blog/index', { 'posts': items });
-        });
-    };
-};
-
 exports.create = function (db) {
     return function (req, res) {
         var data = req.body;
@@ -18,7 +8,17 @@ exports.create = function (db) {
     };
 };
 
-exports.edit = function (db) {
+exports.list = function (db) {
+    return function (req, res) {
+        var page = (req.params.page) ? (req.params.page - 1) : 0,
+            skip = page * 10;
+        db.collection('postlist').find().skip(skip).limit(10).toArray(function (err, items) {
+            res.render('admin/pages/blog/index', { 'posts': items });
+        });
+    };
+};
+
+exports.edit_get = function (db) {
     return function (req, res) {
         var id = req.params.id;
         if(id) {
@@ -32,5 +32,26 @@ exports.edit = function (db) {
         }else {
             res.redirect('/admin/blog');
         }
+    };
+};
+
+exports.edit_post = function (db) {
+    return function (req, res) {
+        var data = req.body,
+            id   = req.params.id;
+        if (id && data) {
+            db.collection('postlist').updateById(id, {$set: {title: data.title, description: data.description}, }, function (err) {
+                if (err) {
+                    return res.send(err);
+                } else {
+                    res.redirect('/admin/blog');
+                }
+            });
+        }
+    };
+};
+exports.destroy = function (db) {
+    return function (req, res) {
+        
     };
 };

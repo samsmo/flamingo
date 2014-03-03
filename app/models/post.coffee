@@ -1,5 +1,5 @@
 module.exports = class PostModel extends Backbone.Model
-    url: '/api/posts'
+    urlRoot: '/api/posts'
     initialize: ->
         
     validate: (attrs, opts) ->

@@ -3,11 +3,14 @@ extends ../../admin-layout
 block content
     .container
         .jumbotron
-            form(method="POST" action="/admin/blog/edit/")
+            form(method="POST" action="/admin/posts/id/#{ post._id }")
                 .form-group
                     label(for="title") Title
                     input(type="text" placeholder="Title" name="title" id="title" value="#{ post.title }" class="form-control")
                 .form-group
                     label(for="description") Description
-                    textarea(id="description" placeholder="Description ..." class="form-control" cols="50") #{ post.description }
+                    textarea(id="description" name="description" placeholder="Description ..." class="form-control" rows="10") #{ post.description }
                 button.btn.btn-submit submit
+    script(src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript")
+    script.
+        bkLib.onDomLoaded(nicEditors.allTextAreas);
