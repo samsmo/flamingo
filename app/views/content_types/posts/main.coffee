@@ -9,6 +9,7 @@ module.exports = class PostsMainView extends Base
         @listenTo @collection, 'add', @addPost
     postRender: ->
         that = @
+        #TODO: add pagination
         if @collection && @collection.models
             _.each @collection.models, (post)->
                 that.addPost(post)

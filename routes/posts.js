@@ -1,11 +1,13 @@
-
 /*
  * GET users listing.
  */
 
 exports.list = function (db) {
     return function (req, res){
-        db.collection('postlist').find().toArray(function (err, items) {
+        page  = (req.query.page) ? parseInt(req.query.page, 10) : 0;
+        limit = (req.query.limit) ? parseInt(req.query.limit, 10) : 0;
+        skip  = page * limit;
+        db.collection('postlist').find().limit(limit).skip(skip).toArray(function (err, items) {
             res.json(items);
         });
     };

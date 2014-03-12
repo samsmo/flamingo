@@ -1,6 +1,9 @@
 Post = require('models/post')
 module.exports = class PostCollection extends Backbone.Collection
-    url: '/api/posts'
+    page: 1
+    limit: 5
+    url: ()->
+        '/api/posts?page=' + @page + '&limit=' + @limit
     model: Post
     initialize: ->
         @fetch()
